@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.prayszll.sys.mapper.MonitoringMapper">
+<select id="getDataList" resultType="java.util.Map">
+   SELECT `taskID`,`taskName`,`indicatorName`,`indicatorValue`,`indicatorUnit`,`indicatorTime`
+   FROM monitoring m
+           JOIN indicatorData i ON m.indicatorID = i.indicatorID
+   WHERE m.taskName = #{taskName}
+   ORDER BY m.indicatorValue DESC
+      LIMIT #{pageNo}, #{pageSize}
+</select>
+   <select id="getAllMonitor" resultType="com.prayszll.sys.entity.Monitoring">
+      select * from monitoring
+   </select>
+   <select id="getJoin" resultType="com.prayszll.sys.entity.Monitoring">
+      SELECT `taskID`,`taskName`,`indicatorName`,`indicatorValue`,`indicatorUnit`,`indicatorTime`
+      FROM monitoring m
+              JOIN indicatorData i ON m.`indicatorID` = i.`indicatorID`
+   </select>
+</mapper>
+
